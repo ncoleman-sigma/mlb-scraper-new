@@ -165,7 +165,7 @@ def _handle_connection_error(exc: Exception) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Scrape MLB player stats for a team.")
-    parser.add_argument("--team", help="Team name (e.g. 'New York Yankees')")
+    parser.add_argument("--team", help="Team name (e.g. 'New York Mets')")
     parser.add_argument("--season", type=int, default=2026, help="Season year (default: 2026)")
     parser.add_argument(
         "--output-dir",
@@ -178,20 +178,15 @@ def main() -> None:
         help="Disable SSL certificate verification (use when behind a corporate proxy)",
     )
     args = parser.parse_args()
-
     if args.no_verify_ssl:
         _disable_ssl_verification()
         print("Note: SSL certificate verification is disabled.")
-
     team_name = args.team
     if not team_name:
         team_name = input("Enter team name (e.g. 'New York Yankees'): ").strip()
-        if not team_name:
-            print("Error: Team name is required.", file=sys.stderr)
-            sys.exit(1)
-
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
 
     mlb = mlbstatsapi.Mlb()
 
