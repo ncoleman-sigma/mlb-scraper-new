@@ -2,6 +2,7 @@ import pandas as pd
 import snowflake.connector
 from snowflake.connector.pandas_tools import write_pandas
 import os
+import glob
 
 def load_csv_to_snowflake(csv_path: str, table_name: str):
     conn = snowflake.connector.connect(
@@ -22,5 +23,14 @@ def load_csv_to_snowflake(csv_path: str, table_name: str):
     print(f"Loaded {nrows} rows into {table_name}")
     conn.close()
 
+
+
 if __name__ == "__main__":
-    load_csv_to_snowflake("mlb_data.csv", "MLB_STATS")  # adjust filenames as needed
+    csv_files = glob.glob("*.csv")
+    if not csv_files:
+        print("No CSV files found!")
+        sys.exit(1)
+    for csv_file in csv_files:
+        table_name = csv_file.replace(".csv", "").replace("-", "_").upper()
+        print(f"Loading {csv_file} → {table_name}")
+        load_csv_to_snowflake(csv_file, table_name)
