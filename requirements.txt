@@ -1,6 +1,6 @@
 requests==2.31.0
 urllib3==2.2.2
-mlbstatsapi==1.7.1
+python-mlb-statsapi==0.7.2
 snowflake-connector-python[pandas]==3.10.1
 pandas==2.2.2
 pyarrow==19.0.1
