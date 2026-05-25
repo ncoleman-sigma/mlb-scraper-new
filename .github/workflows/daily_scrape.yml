@@ -25,7 +25,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run scraper
-        run: python mlb_stats.py --team "New York Mets"
+        run: python mlb_stats.py --team "New York Mets" --output-dir .
 
       - name: Load CSV to Snowflake
         run: python load_to_snowflake.py
