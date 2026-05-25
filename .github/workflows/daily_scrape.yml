@@ -1,5 +1,4 @@
-name: MLB Scraper → Snowflake
-run: python mlb_stats.py --team "New York Mets"
+name: MLB Scraper Snowflake
 
 on:
   schedule:
@@ -26,7 +25,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run scraper
-        run: python mlb_stats.py
+        run: python mlb_stats.py --team "New York Yankees"
 
       - name: Load CSV to Snowflake
         run: python load_to_snowflake.py
@@ -36,4 +35,4 @@ jobs:
           SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
           SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
-          SNOWFLAKE_SCHEMA: ${secrets.SNOWFLAKE_SCHEMA }}
+          SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
